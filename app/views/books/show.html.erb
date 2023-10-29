@@ -1,0 +1,51 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+
+      <%= render 'users/list', user: @book_user %>
+
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to user_path(@book_user) do %>
+                <%= image_tag @book_user.get_profile_image(100,100) %></br>
+                <%= @book_user.name %>
+              <% end %>
+            </td>
+            
+            <td>
+              <%= link_to book_path(@book_detail.id) do %>
+                <%= @book_detail.title %>
+              <% end %>
+            </td>
+            <td>
+              <%= @book_detail.body %>
+            </td>
+
+            <td>
+              <%if @book_detail.user == current_user %>
+                <%= link_to "Edit", edit_book_path(@book_detail.id), class:"btn btn-success"%>
+              <% end %>
+            </td>
+            <td>
+              <%if @book_detail.user == current_user %>
+                <%= link_to "Destroy", book_path(@book_detail), method: :delete, class:"btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
